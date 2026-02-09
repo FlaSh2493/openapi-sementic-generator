@@ -1,4 +1,4 @@
-# OpenAPI-Agent-Sync (oas-agent-sync)
+# OpenAPI Semantic Generator (@dotflash/openapi-semantic-generator)
 
 [English](#english) | [한국어](#한국어)
 
@@ -41,13 +41,13 @@ It provides an index and guide that allows LLMs to understand large-scale API co
 ### Installation
 
 ```bash
-npm install -g oas-agent-sync
+npm install -g @dotflash/openapi-semantic-generator
 ```
 
 ### Usage
 
 ```bash
-npx oas-agent-sync <spec-url-or-path> -o <generated-code-dir> [options]
+npx openapi-semantic-generator <spec-url-or-path> -o <generated-code-dir> [options]
 ```
 
 #### Required Arguments
@@ -91,13 +91,13 @@ OpenAPI Generator로 생성된 코드들을 분석하여 LLM 에이전트가 활
 ### 설치 방법
 
 ```bash
-npm install -g oas-agent-sync
+npm install -g @dotflash/openapi-semantic-generator
 ```
 
 ### 사용 방법
 
 ```bash
-npx oas-agent-sync <spec-url-or-path> -o <generated-code-dir> [options]
+npx openapi-semantic-generator <spec-url-or-path> -o <generated-code-dir> [options]
 ```
 
 #### 필수 인자

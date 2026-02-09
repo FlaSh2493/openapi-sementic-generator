@@ -49,10 +49,29 @@ export async function renderDocs(
 
   const groupedOperations = Object.entries(operationsByTag).map(([tag, ops]) => ({
     tag,
-    ops: ops.map((op, index) => ({
-      ...op,
-      last: index === ops.length - 1
-    }))
+    ops: ops.map((op, index) => {
+      // Calculate relative path from outputDir to sourceFile
+      // sourceFile is currently relative to outputDir from scanner (e.g. api/UserApi.ts)
+      // We want to ensure it's presented correctly as a relative path
+      // If sourceFile is absolute, make it relative to outputDir
+      // If sourceFile is already relative (from scanner), it's relative to outputDir
+      
+      let relativePath = op.sourceFile;
+      if (path.isAbsolute(op.sourceFile)) {
+        relativePath = path.relative(outputDir, op.sourceFile);
+      }
+      
+      // Ensure path starts with ./
+      if (!relativePath.startsWith('./') && !relativePath.startsWith('../')) {
+        relativePath = './' + relativePath;
+      }
+      
+      return {
+        ...op,
+        sourceFile: relativePath,
+        last: index === ops.length - 1
+      };
+    })
   }));
 
   const enrichedMetadata = {

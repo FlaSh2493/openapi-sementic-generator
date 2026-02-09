@@ -1,13 +1,13 @@
 {
-  "name": "oas-agent-sync",
-  "version": "0.1.0",
+  "name": "@dotflash/openapi-semantic-generator",
+  "version": "0.1.1",
   "description": "Semantic mapping automation tool for LLM agents and OpenAPI generated code",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "oas-agent-sync": "dist/cli.js"
+    "openapi-semantic-generator": "dist/cli.js"
   },
   "files": [
     "dist",
