@@ -56,8 +56,30 @@ npx openapi-semantic-generator <spec-url-or-path> -o <generated-code-dir> [optio
 
 #### Options
 
-- `-o, --output <dir>`: Directory where the code is already generated (e.g., `./src/api`)
-- `--api-dir <path>`: Relative path to APIs within the output directory (e.g., `services`)
+- `-o, --output <dir>`: **Required.** Directory where the generated code is located. This tool will scan this directory to find API files.
+  - Example: `./src/api`, `./generated/client`
+  - **Important**: The generated TypeScript files must be inside this directory or its subdirectories.
+
+- `--api-dir <path>`: Optional. Relative path from the output directory where API files are located.
+  - Example: `services`, `api`, `client/apis`
+  - This path is **relative to the `-o` directory**, not the current working directory.
+  - If not specified, the tool searches in `api/`, `apis/`, and the output directory itself (in that order).
+
+#### Usage Examples
+
+```bash
+# Basic usage: API files are in ./src/api/
+npx openapi-semantic-generator spec.yaml -o ./src/api
+
+# API files are in ./generated/services/
+npx openapi-semantic-generator spec.yaml -o ./generated --api-dir services
+
+# Using a remote spec URL
+npx openapi-semantic-generator https://api.example.com/openapi.json -o ./src/api
+
+# API files are directly in the output directory
+npx openapi-semantic-generator spec.yaml -o ./dist/client
+```
 
 ### Generated Documents
 
@@ -106,8 +128,30 @@ npx openapi-semantic-generator <spec-url-or-path> -o <generated-code-dir> [optio
 
 #### 옵션
 
-- `-o, --output <dir>`: 이미 생성된 코드가 위치한 디렉토리 (예: `./src/api`)
-- `--api-dir <path>`: 출력 디렉토리 내 API 파일이 위치한 상대 경로 (예: `services`)
+- `-o, --output <dir>`: **필수.** 생성된 코드가 위치한 디렉토리입니다. 이 도구는 해당 디렉토리를 스캔하여 API 파일을 찾습니다.
+  - 예시: `./src/api`, `./generated/client`
+  - **중요**: 생성된 TypeScript 파일이 반드시 이 디렉토리 또는 하위 디렉토리에 있어야 합니다.
+
+- `--api-dir <path>`: 선택사항. 출력 디렉토리 기준으로 API 파일이 위치한 상대 경로입니다.
+  - 예시: `services`, `api`, `client/apis`
+  - 이 경로는 **`-o` 디렉토리 기준의 상대 경로**이며, 현재 작업 디렉토리 기준이 아닙니다.
+  - 지정하지 않으면 `api/`, `apis/`, 출력 디렉토리 자체를 순서대로 검색합니다.
+
+#### 사용 예시
+
+```bash
+# 기본 사용: API 파일이 ./src/api/에 있는 경우
+npx openapi-semantic-generator spec.yaml -o ./src/api
+
+# API 파일이 ./generated/services/에 있는 경우
+npx openapi-semantic-generator spec.yaml -o ./generated --api-dir services
+
+# 원격 스펙 URL 사용
+npx openapi-semantic-generator https://api.example.com/openapi.json -o ./src/api
+
+# API 파일이 출력 디렉토리 바로 아래에 있는 경우
+npx openapi-semantic-generator spec.yaml -o ./dist/client
+```
 
 ### 생성되는 문서
 
