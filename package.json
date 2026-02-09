@@ -1,6 +1,6 @@
 {
   "name": "@dotflash/openapi-semantic-generator",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Semantic mapping automation tool for LLM agents and OpenAPI generated code",
   "type": "module",
   "main": "dist/index.js",
