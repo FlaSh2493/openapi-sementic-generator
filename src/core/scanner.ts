@@ -38,12 +38,12 @@ export async function scanGeneratedFiles(
       
       if (op.tags && op.tags.length > 0) {
         const primaryTag = op.tags[0].toLowerCase();
+        const normalizedTag = primaryTag.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
         
         // Try to find API file matching the tag
-        // e.g., tag 'pet' should match 'pet-api.ts' or 'PetApi.ts'
         const found = apis.find(api => {
           const fileName = api.className.toLowerCase();
-          return fileName.includes(primaryTag);
+          return fileName.includes(normalizedTag) || fileName.includes(primaryTag.replace(/\s+/g, ''));
         });
         
         if (found) {

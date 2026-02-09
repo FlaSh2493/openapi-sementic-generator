@@ -64,9 +64,10 @@ export async function extractMetadata(
           }
 
           operations.push({
-            operationId:
+            operationId: toCamelCase(
               typedDetails.operationId ||
-              `${method}_${path.replace(/\//g, "_")}`,
+              `${method}_${path.replace(/\//g, "_")}`
+            ),
             summary: typedDetails.summary,
             description: typedDetails.description,
             httpMethod: method.toUpperCase(),
@@ -93,6 +94,12 @@ export async function extractMetadata(
       description: cleanDescription(op.description || op.summary),
     })),
   };
+}
+
+function toCamelCase(str: string): string {
+  return str
+    .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
+    .replace(/[^a-zA-Z0-9]/g, "");
 }
 
 function cleanDescription(desc?: string): string {
