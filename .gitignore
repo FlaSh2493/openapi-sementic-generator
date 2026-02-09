@@ -1,4 +1,4 @@
 node_modules
 dist
-.openapitools.json
+openapitools.json
 test/generated
