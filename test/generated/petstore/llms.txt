@@ -1,0 +1,7 @@
+# Swagger Petstore APIs
+## pets
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|List all pets|`listPets`|`GET /pets`|`api.ts`|
+|Create a pet|`createPets`|`POST /pets`|`api.ts`|
+|Info for a specific pet|`showPetById`|`GET /pets/{petId}`|`api.ts`|
