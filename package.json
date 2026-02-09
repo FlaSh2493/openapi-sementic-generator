@@ -1,0 +1,49 @@
+{
+  "name": "oas-agent-sync",
+  "version": "0.1.0",
+  "description": "Semantic mapping automation tool for LLM agents and OpenAPI generated code",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "oas-agent-sync": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "src/templates"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup src/index.ts src/cli.ts --format cjs,esm --watch --shims",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "gen:example": "openapi-generator-cli generate -i test/fixtures/petstore.yaml -g typescript-axios -o test/generated/petstore && node dist/cli.js test/fixtures/petstore.yaml -o test/generated/petstore --api-dir api"
+  },
+  "keywords": [
+    "openapi",
+    "generator",
+    "llm",
+    "agent",
+    "semantic-mapping",
+    "documentation"
+  ],
+  "author": "no1flash",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0",
+    "mustache": "^4.2.0",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.28.2",
+    "@types/fs-extra": "^11.0.4",
+    "@types/mustache": "^4.2.5",
+    "@types/node": "^22.13.1",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
