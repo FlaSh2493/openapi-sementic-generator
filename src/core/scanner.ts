@@ -28,15 +28,31 @@ export async function scanGeneratedFiles(
     }
   }
 
-  // Map operations to source files (This requires more sophisticated analysis like ts-morph)
-  // For the initial version, we will use a heuristic: operationId is likely in one of the API classes
+  // Map operations to source files based on tags
   if (metadata.operations) {
     for (const op of metadata.operations) {
-      // Heuristic: matching className if available, otherwise pick the first one
-      if (apis.length > 0) {
-        op.className = apis[0].className;
-        op.sourceFile = apis[0].sourceFile;
+      if (apis.length === 0) continue;
+      
+      // Try to match based on tag
+      let matchedApi = apis[0]; // Default to first
+      
+      if (op.tags && op.tags.length > 0) {
+        const primaryTag = op.tags[0].toLowerCase();
+        
+        // Try to find API file matching the tag
+        // e.g., tag 'pet' should match 'pet-api.ts' or 'PetApi.ts'
+        const found = apis.find(api => {
+          const fileName = api.className.toLowerCase();
+          return fileName.includes(primaryTag);
+        });
+        
+        if (found) {
+          matchedApi = found;
+        }
       }
+      
+      op.className = matchedApi.className;
+      op.sourceFile = matchedApi.sourceFile;
     }
   }
 

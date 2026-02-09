@@ -5,9 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** |  | [default to undefined]
+**id** | **number** |  | [optional] [default to undefined]
 **name** | **string** |  | [default to undefined]
-**tag** | **string** |  | [optional] [default to undefined]
+**category** | [**Category**](Category.md) |  | [optional] [default to undefined]
+**photoUrls** | **Array&lt;string&gt;** |  | [default to undefined]
+**tags** | [**Array&lt;Tag&gt;**](Tag.md) |  | [optional] [default to undefined]
+**status** | **string** | pet status in the store | [optional] [default to undefined]
 
 ## Example
 
@@ -17,7 +20,10 @@ import { Pet } from './api';
 const instance: Pet = {
     id,
     name,
-    tag,
+    category,
+    photoUrls,
+    tags,
+    status,
 };
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "@dotflash/openapi-semantic-generator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Semantic mapping automation tool for LLM agents and OpenAPI generated code",
   "type": "module",
   "main": "dist/index.js",
@@ -19,7 +19,8 @@
     "dev": "tsup src/index.ts src/cli.ts --format cjs,esm --watch --shims",
     "test": "vitest run",
     "test:watch": "vitest",
-    "gen:example": "openapi-generator-cli generate -i test/fixtures/petstore.yaml -g typescript-axios -o test/generated/petstore && node dist/cli.js test/fixtures/petstore.yaml -o test/generated/petstore --api-dir api"
+    "gen:example": "openapi-generator-cli generate -i https://petstore3.swagger.io/api/v3/openapi.json -g typescript-axios -o test/generated/petstore && node dist/cli.js https://petstore3.swagger.io/api/v3/openapi.json -o test/generated/petstore",
+    "gen:example:separate": "openapi-generator-cli generate -i https://petstore3.swagger.io/api/v3/openapi.json -g typescript-axios -o test/generated/petstore-separate --additional-properties=withSeparateModelsAndApi=true,apiPackage=apis,modelPackage=models && node dist/cli.js https://petstore3.swagger.io/api/v3/openapi.json -o test/generated/petstore-separate --api-dir apis"
   },
   "keywords": [
     "openapi",
