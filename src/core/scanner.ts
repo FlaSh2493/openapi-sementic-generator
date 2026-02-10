@@ -19,22 +19,35 @@ export async function scanGeneratedFiles(
 
     const files = await fs.readdir(fullDir);
     for (const file of files) {
-      if ((file.endsWith('Api.ts') || file.endsWith('api.ts')) && !file.endsWith('.test.ts')) {
+      const lowerFile = file.toLowerCase();
+      // Include all .ts/.js files but exclude tests and index files
+      const isCodeFile = file.endsWith('.ts') || file.endsWith('.js');
+      const isTestFile = lowerFile.endsWith('.test.ts') || lowerFile.endsWith('.spec.ts');
+      const isIndexFile = lowerFile === 'index.ts' || lowerFile === 'index.js';
+
+      if (isCodeFile && !isTestFile && !isIndexFile) {
         apis.push({
-          className: file.replace('.ts', ''), // Simplified
+          className: file.replace(/\.[jt]s$/, ''), 
           sourceFile: path.join(dirName, file)
         });
       }
     }
   }
 
-  // Map operations to source files based on tags
+  // Map operations to source files
   if (metadata.operations) {
     for (const op of metadata.operations) {
       if (apis.length === 0) continue;
       
+      // FALLBACK: If there's only one API file, map everything to it
+      if (apis.length === 1) {
+        op.className = apis[0].className;
+        op.sourceFile = apis[0].sourceFile;
+        continue;
+      }
+
       // Try to match based on tag
-      let matchedApi = apis[0]; // Default to first
+      let matchedApi = apis[0]; // Default to first (though multiple files exist)
       
       if (op.tags && op.tags.length > 0) {
         const primaryTag = op.tags[0].toLowerCase();

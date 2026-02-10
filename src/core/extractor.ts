@@ -97,9 +97,10 @@ export async function extractMetadata(
 }
 
 function toCamelCase(str: string): string {
-  return str
+  const camel = str
     .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
     .replace(/[^a-zA-Z0-9]/g, "");
+  return camel.charAt(0).toLowerCase() + camel.slice(1);
 }
 
 function cleanDescription(desc?: string): string {

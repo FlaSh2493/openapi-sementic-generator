@@ -1,0 +1,282 @@
+# FastAPI APIs
+## Organizations&#x2F;JWT Forward
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|데컨팀 전용 엔드포인트|`tokenSaveTokenSavePost`|`POST /token/save`|`./tsup.config.ts`|
+|데컨팀 전용 엔드포인트|`tokenRetrieveTokenRetrieveGet`|`GET /token/retrieve`|`./tsup.config.ts`|
+## Common&#x2F;OAuth
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Google OAuth 연동 조회 API (연동 후) sns_id + account_type 조합으로 기존 |`queryGoogleOauthCommonOauthGoogleGet`|`GET /common/oauth/google`|`./tsup.config.ts`|
+|Google OAuth 연동 등록 API (연동 전) 프론트에서 Google 로그인 후 받은 authoriz|`registerGoogleOauthCommonOauthGooglePost`|`POST /common/oauth/google`|`./tsup.config.ts`|
+|Google OAuth 토큰 직접 등록 API 이미 발급받은 access_token과 refresh_toke|`registerGoogleOauthByTokenCommonOauthGoogleTokenPost`|`POST /common/oauth/google/token`|`./tsup.config.ts`|
+|현재 사용자의 OAuth 계정 조회 API 캐시에서 가장 최근 로그인한 OAuth 계정 정보를 조회합니다. |`getCurrentGoogleOauthCommonOauthGoogleCurrentGet`|`GET /common/oauth/google/current`|`./tsup.config.ts`|
+## Organizations
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Organizations 목록 조회|`getOrgIndexOrganizationsGet`|`GET /organizations`|`./tsup.config.ts`|
+|Cognito User에 Organization id 추가하여 토큰 발급|`createOrganizationTokenOrganizationsTokenPost`|`POST /organizations/token`|`./tsup.config.ts`|
+|Organization에 속한 Workspace list|`getOrganizationWorkspacesOrganizationsWorkspacesGet`|`GET /organizations/workspaces`|`./tsup.config.ts`|
+|Organization에 속한 User 전체 조회|`getOrganizationUsersOrganizationsUsersGet`|`GET /organizations/users`|`./tsup.config.ts`|
+|Organization의 공용자산 전체 조회|`getOrganizationAccountsOrganizationsAccountsGet`|`GET /organizations/accounts`|`./tsup.config.ts`|
+|Organization의 공용조산을 id로 조회|`getOrganizationAccountByIdOrganizationsAccountsAccountIdGet`|`GET /organizations/accounts/{account_id}`|`./tsup.config.ts`|
+|조직 전체의 특정 account_type에 해당하는 media_account들에 대한 일괄 수집 요청 req|`bulkCollectMediaAccountsByAccountTypeOrganizationsMediaAccountsBulkCollectPost`|`POST /organizations/media_accounts/bulk_collect`|`./tsup.config.ts`|
+## Organizations&#x2F;Users
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Organization 본인 프로필 정보 조회 API|`getUserInfoUsersMeGet`|`GET /users/me`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|workspace 하위 모든 media account 조회|`getMediaAccountsWorkspacesWorkspaceIdMediaAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts`|`./tsup.config.ts`|
+|특정 media_account 조회|`getMediaAccountByIdWorkspacesWorkspaceIdMediaAccountsMediaAccountIdGet`|`GET /workspaces/{workspace_id}/media-accounts/{media_account_id}`|`./tsup.config.ts`|
+|media 삭제|`deleteMediaAccountByIdWorkspacesWorkspaceIdMediaAccountsMediaAccountIdDelete`|`DELETE /workspaces/{workspace_id}/media-accounts/{media_account_id}`|`./tsup.config.ts`|
+|자산 수정 내역 조회 api|`getMediaAccountUpdateHistoryByIdWorkspacesWorkspaceIdMediaAccountsMediaAccountIdUpdateHistoryGet`|`GET /workspaces/{workspace_id}/media-accounts/{media_account_id}/update/history`|`./tsup.config.ts`|
+|DM에 해당 미디어 어카운트 수집 요청|`collectRequestToDmWorkspacesWorkspaceIdMediaAccountsMediaAccountIdCollectPost`|`POST /workspaces/{workspace_id}/media-accounts/{media_account_id}/collect`|`./tsup.config.ts`|
+|자산 수집 요청 내역 조회 API(IET-6386)|`getCollectHistoriesWorkspacesWorkspaceIdMediaAccountsMediaAccountIdCollectHistoriesGet`|`GET /workspaces/{workspace_id}/media-accounts/{media_account_id}/collect/histories`|`./tsup.config.ts`|
+|media_account id를 기준으로 dw_account_id 조회|`getDwAccountIdByMediaAccountWorkspacesWorkspaceIdMediaAccountsMediaAccountIdDwAccountIdGet`|`GET /workspaces/{workspace_id}/media-accounts/{media_account_id}/dw_account_id`|`./tsup.config.ts`|
+|토큰 리프레시가 필요한 미디어 정보 조회 API(Google, Facebook, G-sheet에 한함)|`getNeedToRefreshAccountsWorkspacesWorkspaceIdMediaAccountsNeedToRefreshGet`|`GET /workspaces/{workspace_id}/media-accounts/need-to-refresh`|`./tsup.config.ts`|
+|Media account 세부 내역 조회(사용중인 Report Template 목록)|`getMediaAccountIncludedWorkspacesWorkspaceIdMediaAccountsIncludedGet`|`GET /workspaces/{workspace_id}/media-accounts/included`|`./tsup.config.ts`|
+|media account status on/off 수정|`putStatusInMediaAccountWorkspacesWorkspaceIdMediaAccountsMediaAccountIdStatusPut`|`PUT /workspaces/{workspace_id}/media-accounts/{media_account_id}/status`|`./tsup.config.ts`|
+|각 센터의 상태 및 수집 날짜 업데이트 API(시스템 유저 전용)|`updateMediaAccountStatusByCenterTypeWorkspacesWorkspaceIdMediaAccountsMediaAccountIdStatusPost`|`POST /workspaces/{workspace_id}/media-accounts/{media_account_id}/status`|`./tsup.config.ts`|
+|Media account 컬럼 삭제 시, 사용 중인 리포트 확인(GA, Airbridge)|`getMediaAccountColumnIncludedWorkspacesWorkspaceIdMediaAccountsColumnIncludedGet`|`GET /workspaces/{workspace_id}/media-accounts/column-included`|`./tsup.config.ts`|
+|media account 센터별 상태값 조회|`getMediaAccountCenterStatusWorkspacesWorkspaceIdMediaAccountsMediaAccountIdCenterStatusGet`|`GET /workspaces/{workspace_id}/media-accounts/{media_account_id}/center-status`|`./tsup.config.ts`|
+|미디어 어카운트의 수집 상태 캘린더 조회|`getCollectHistorySummaryWorkspacesWorkspaceIdMediaAccountsMediaAccountIdCollectHistorySummaryGet`|`GET /workspaces/{workspace_id}/media-accounts/{media_account_id}/collect/history-summary`|`./tsup.config.ts`|
+|수집 요청 취소 API 1. 취소할 존재 여부 및 날짜 요청 확인 2. Resource가 아니면 DM에 비동|`cancelCollectionRequestWorkspacesWorkspaceIdMediaAccountsMediaAccountIdCancelPost`|`POST /workspaces/{workspace_id}/media-accounts/{media_account_id}/cancel`|`./tsup.config.ts`|
+|재수집 요청 취소 API|`cancelUserRequestedCollectionWorkspacesWorkspaceIdMediaAccountsMediaAccountIdCancelUserRequestedPost`|`POST /workspaces/{workspace_id}/media-accounts/{media_account_id}/cancel-user-requested`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Kakao
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|카카오 광고계정 조회|`getKakaoAdAccountsWorkspacesWorkspaceIdMediaAccountsKakaoAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/kakao/ad-accounts`|`./tsup.config.ts`|
+|카카오 광고 계정이 해당 org account에 속해있는지 확인|`verifyKakaoAdAccountWorkspacesWorkspaceIdMediaAccountsKakaoAdAccountsValidateGet`|`GET /workspaces/{workspace_id}/media-accounts/kakao/ad-accounts/validate`|`./tsup.config.ts`|
+|카카오 media account 생성|`createKakaoMediaAccountWorkspacesWorkspaceIdMediaAccountsKakaoPost`|`POST /workspaces/{workspace_id}/media-accounts/kakao`|`./tsup.config.ts`|
+|카카오 media account 수정|`putKakaoMediaAccountWorkspacesWorkspaceIdMediaAccountsKakaoMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/kakao/{media_account_id}`|`./tsup.config.ts`|
+|카카오 계정 유효성 검사|`verifyKakaoAccountWorkspacesWorkspaceIdMediaAccountsKakaoMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/kakao/{media_account_id}/verify`|`./tsup.config.ts`|
+## Workspace &#x2F; Media_accounts &#x2F; Appsflyer
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|appsflyer media account 생성|`createAppsflyerMediaAccountWorkspacesWorkspaceIdMediaAccountsAppsflyerPost`|`POST /workspaces/{workspace_id}/media-accounts/appsflyer`|`./tsup.config.ts`|
+|appsflyer media account 데이터 수정|`putAppsflyerMediaAccountWorkspacesWorkspaceIdMediaAccountsAppsflyerMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/appsflyer/{media_account_id}`|`./tsup.config.ts`|
+|appsflyer 수집 정책 API(IET-6348) appsflyer 포맷에 맞게 정책 리턴|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsAppsflyerPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/appsflyer/policy`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts &#x2F; Meta
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|해당 유저의 페이스북 비즈니스 조회|`getMetaBusinessWorkspacesWorkspaceIdMediaAccountsMetaBusinessesGet`|`GET /workspaces/{workspace_id}/media-accounts/meta/businesses`|`./tsup.config.ts`|
+|해당 facebook business id의 광고계정 목록 조회|`getMetaAdAccountsWorkspacesWorkspaceIdMediaAccountsMetaBusinessesAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/meta/businesses/ad-accounts`|`./tsup.config.ts`|
+|Meta media account 생성|`createMetaMediaAccountWorkspacesWorkspaceIdMediaAccountsMetaPost`|`POST /workspaces/{workspace_id}/media-accounts/meta`|`./tsup.config.ts`|
+|Meta media account 수정|`putMetaMediaAccountWorkspacesWorkspaceIdMediaAccountsMetaMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/meta/{media_account_id}`|`./tsup.config.ts`|
+|Meta 계정 유효성 검사|`verifyMetaMediaAccountWorkspacesWorkspaceIdMediaAccountsMetaMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/meta/{media_account_id}/verify`|`./tsup.config.ts`|
+|메타 수집 정책 조회 API(IET-6310)|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsMetaPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/meta/policy`|`./tsup.config.ts`|
+## Workspace &#x2F; Media_accounts &#x2F; Apple Search
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Apple Search Ads 연동 가능한 계정 목록 확인|`getAppleSearchAccountListWorkspacesWorkspaceIdMediaAccountsAppleSearchAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/apple-search/ad-accounts`|`./tsup.config.ts`|
+|Apple Search Ads media 생성 get_apple_search_account_list에서 조회|`createAppleSearchMediaAccountWorkspacesWorkspaceIdMediaAccountsAppleSearchPost`|`POST /workspaces/{workspace_id}/media-accounts/apple-search`|`./tsup.config.ts`|
+|Apple Search Ads media 수정|`putAppleSearchMediaAccountWorkspacesWorkspaceIdMediaAccountsAppleSearchMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/apple-search/{media_account_id}`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts &#x2F; Google
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|구글 code를 사용해 구글 엑세스 토큰 발급|`mediaAccountGoogleOauthWorkspacesWorkspaceIdMediaAccountsGoogleTokenPost`|`POST /workspaces/{workspace_id}/media-accounts/google/token`|`./tsup.config.ts`|
+|구글 토큰 리프레시 함수. 테스트 목적으로 추가|`googleTokenRefreshWorkspacesWorkspaceIdMediaAccountsGoogleTokenRefreshPost`|`POST /workspaces/{workspace_id}/media-accounts/google/token/refresh`|`./tsup.config.ts`|
+|구글 애즈 광고계정 조회 API(참고로, 많이 느려요...)|`getGoogleAdsAccountsWorkspacesWorkspaceIdMediaAccountsGoogleAdsAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/google/ads/ad-accounts`|`./tsup.config.ts`|
+|구글 애즈 계정 생성 API|`createGoogleAdsAccountWorkspacesWorkspaceIdMediaAccountsGoogleAdsPost`|`POST /workspaces/{workspace_id}/media-accounts/google/ads`|`./tsup.config.ts`|
+|구글 애즈 계정 수정 API|`putGoogleAdsAccountWorkspacesWorkspaceIdMediaAccountsGoogleAdsMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/google/ads/{media_account_id}`|`./tsup.config.ts`|
+|조직 자산에 대한 구글 애즈 계정 유효성 검사 기존 login_customer_id는 무시|`verifyGoogleAdsAccountWorkspacesWorkspaceIdMediaAccountsGoogleAdsMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/google/ads/{media_account_id}/verify`|`./tsup.config.ts`|
+|구글 애즈 수집 정책 조회 API(IET-6310)|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsGoogleAdsPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/google/ads/policy`|`./tsup.config.ts`|
+|GA 광고계정 조회 API|`getAnalyticsAccountsWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/google/analytics/ad-accounts`|`./tsup.config.ts`|
+|GA 웹 속성 조회 API|`getAccountsWebPropertiesWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsWebPropertiesGet`|`GET /workspaces/{workspace_id}/media-accounts/google/analytics/web-properties`|`./tsup.config.ts`|
+|GA 계정 생성 API(연동 완료를 위해 호출)|`createGoogleAnalyticsAccountWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsPost`|`POST /workspaces/{workspace_id}/media-accounts/google/analytics`|`./tsup.config.ts`|
+|GA 계정 수정 API|`putGoogleAnalyticsAccountWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/google/analytics/{media_account_id}`|`./tsup.config.ts`|
+|GA3 컬럼 조회 API(IET-2120)|`getGaDimensionsAndMetricsWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsDimensionsMetricsGet`|`GET /workspaces/{workspace_id}/media-accounts/google/analytics/dimensions-metrics`|`./tsup.config.ts`|
+|GA3 Dimensions & Metrics 조합 검증 API|`validateGaDimensionsAndMetricsWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsDimensionsMetricsValidatePost`|`POST /workspaces/{workspace_id}/media-accounts/google/analytics/dimensions-metrics/validate`|`./tsup.config.ts`|
+|GA 계정 유효성 검증|`verifyGoogleAnalyticsAccountWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/google/analytics/{media_account_id}/verify`|`./tsup.config.ts`|
+|google analytics 수집 정책 API(IET-6338)|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsGoogleAnalyticsPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/google/analytics/policy`|`./tsup.config.ts`|
+|DV360 파트너 조회 API|`getDv360PartnersWorkspacesWorkspaceIdMediaAccountsGoogleDv360PartnersGet`|`GET /workspaces/{workspace_id}/media-accounts/google/dv360/partners`|`./tsup.config.ts`|
+|DV360 광고주 조회 API|`getDv360AdvertisersWorkspacesWorkspaceIdMediaAccountsGoogleDv360AdvertisersGet`|`GET /workspaces/{workspace_id}/media-accounts/google/dv360/advertisers`|`./tsup.config.ts`|
+|DV360 계정 생성 API|`createDv360AccountWorkspacesWorkspaceIdMediaAccountsGoogleDv360Post`|`POST /workspaces/{workspace_id}/media-accounts/google/dv360`|`./tsup.config.ts`|
+|DV360 계정 수정 API|`putDv360AccountWorkspacesWorkspaceIdMediaAccountsGoogleDv360MediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/google/dv360/{media_account_id}`|`./tsup.config.ts`|
+|DV360 계정 유효성 검사|`verifyDv360AccountWorkspacesWorkspaceIdMediaAccountsGoogleDv360MediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/google/dv360/{media_account_id}/verify`|`./tsup.config.ts`|
+|DV360 수집 정책 조회 API|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsGoogleDv360PolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/google/dv360/policy`|`./tsup.config.ts`|
+|DV360 필터 및 메트릭 메타데이터 조회 API|`getDv360MetadataWorkspacesWorkspaceIdMediaAccountsGoogleDv360MetadataGet`|`GET /workspaces/{workspace_id}/media-accounts/google/dv360/metadata`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts &#x2F; Moloco
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Moloco ad account 조회|`getMolocoAdAccountsWorkspacesWorkspaceIdMediaAccountsMolocoAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/moloco/ad-accounts`|`./tsup.config.ts`|
+|Moloco media 생성|`createMolocoMediaAccountWorkspacesWorkspaceIdMediaAccountsMolocoPost`|`POST /workspaces/{workspace_id}/media-accounts/moloco`|`./tsup.config.ts`|
+|moloco media 수정|`putMolocoMediaAccountWorkspacesWorkspaceIdMediaAccountsMolocoMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/moloco/{media_account_id}`|`./tsup.config.ts`|
+|몰로코 계정 유효성 검사|`verifyMolocoAccountWorkspacesWorkspaceIdMediaAccountsMolocoMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/moloco/{media_account_id}/verify`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts &#x2F; SnapChat
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|해당 유저의 스냅챗 조직 조회|`getSnapchatOrganizationsWorkspacesWorkspaceIdMediaAccountsSnapchatOrganizationsGet`|`GET /workspaces/{workspace_id}/media-accounts/snapchat/organizations`|`./tsup.config.ts`|
+|해당 snapchat organization id의 광고계정 목록 조회|`getSnapchatOrganizationAdAccountsWorkspacesWorkspaceIdMediaAccountsSnapchatOrganizationsAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/snapchat/organizations/ad-accounts`|`./tsup.config.ts`|
+|SnapChat media account 생성|`createSnapchatMediaAccountWorkspacesWorkspaceIdMediaAccountsSnapchatPost`|`POST /workspaces/{workspace_id}/media-accounts/snapchat`|`./tsup.config.ts`|
+|SnapChat media account 수정|`putSnapchatMediaAccountWorkspacesWorkspaceIdMediaAccountsSnapchatMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/snapchat/{media_account_id}`|`./tsup.config.ts`|
+|SnapChat 계정 유효성 검사|`verifySnapchatMediaAccountCredentialWorkspacesWorkspaceIdMediaAccountsSnapchatMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/snapchat/{media_account_id}/verify`|`./tsup.config.ts`|
+|스냅챗 수집 정책 조회 API|`getSnapchatAccountPolicyWorkspacesWorkspaceIdMediaAccountsSnapchatPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/snapchat/policy`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts &#x2F; Twitter
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|트위터 ad account 조회|`getTwitterAdAccountsWorkspacesWorkspaceIdMediaAccountsTwitterAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/twitter/ad-accounts`|`./tsup.config.ts`|
+|트위터 media 생성|`createTwitterMediaAccountWorkspacesWorkspaceIdMediaAccountsTwitterPost`|`POST /workspaces/{workspace_id}/media-accounts/twitter`|`./tsup.config.ts`|
+|트위터 media 수정|`putTwitterMediaAccountWorkspacesWorkspaceIdMediaAccountsTwitterMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/twitter/{media_account_id}`|`./tsup.config.ts`|
+|트위터 계정 유효성 검사|`verifyTwitterAccountWorkspacesWorkspaceIdMediaAccountsTwitterMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/twitter/{media_account_id}/verify`|`./tsup.config.ts`|
+|Twitter 수집 정책 API(IET-6338)|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsTwitterPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/twitter/policy`|`./tsup.config.ts`|
+## Workspaces &#x2F; Media Accounts &#x2F; Airbridge
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Get Airbridge Metadata|`getAirbridgeMetadataWorkspacesWorkspaceIdMediaAccountsAirbridgeMetadataGet`|`GET /workspaces/{workspace_id}/media-accounts/airbridge/metadata`|`./tsup.config.ts`|
+|Create Airbridge Media Account|`createAirbridgeMediaAccountWorkspacesWorkspaceIdMediaAccountsAirbridgePost`|`POST /workspaces/{workspace_id}/media-accounts/airbridge`|`./tsup.config.ts`|
+|airbridge 수정 API|`putAirbridgeMediaAccountWorkspacesWorkspaceIdMediaAccountsAirbridgeMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/airbridge/{media_account_id}`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Naver
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|네이버 SA 광고 계정 목록 조회|`getNaverSaAdAccountsWorkspacesWorkspaceIdMediaAccountsNaverSaAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/naver/sa/ad-accounts`|`./tsup.config.ts`|
+|네이버 SA 광고 계정 생성|`createNaverSaMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverSaPost`|`POST /workspaces/{workspace_id}/media-accounts/naver/sa`|`./tsup.config.ts`|
+|네이버 SA 계정 수정|`putNaverSaMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverSaMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/naver/sa/{media_account_id}`|`./tsup.config.ts`|
+|네이버 NOSP광고 계정 생성|`createNaverNospMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverNospPost`|`POST /workspaces/{workspace_id}/media-accounts/naver/nosp`|`./tsup.config.ts`|
+|네이버 NOSP 광고 계정 수정|`putNaverNospMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverNospMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/naver/nosp/{media_account_id}`|`./tsup.config.ts`|
+|NOSP key 검증 API|`validateNospKeyWorkspacesWorkspaceIdMediaAccountsNaverNospValidatePost`|`POST /workspaces/{workspace_id}/media-accounts/naver/nosp/validate`|`./tsup.config.ts`|
+|Naver GFA 연동 가능한 계정 목록 확인|`getNaverGfaAdAccountsWorkspacesWorkspaceIdMediaAccountsNaverGfaAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/naver/gfa/ad-accounts`|`./tsup.config.ts`|
+|네이버 GFA 계정 생성|`createNaverGfaMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverGfaPost`|`POST /workspaces/{workspace_id}/media-accounts/naver/gfa`|`./tsup.config.ts`|
+|네이버 GFA 계정 수정 (수정되는 값이 중복이면 400에러)|`putNaverGfaMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverGfaMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/naver/gfa/{media_account_id}`|`./tsup.config.ts`|
+|네이버 GFA 계정 유효성 검사|`verifyNaverGfaAccountWorkspacesWorkspaceIdMediaAccountsNaverGfaMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/naver/gfa/{media_account_id}/verify`|`./tsup.config.ts`|
+|네이버 브랜드스토어 media account 생성|`createNaverBrandstoreMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverBrandstorePost`|`POST /workspaces/{workspace_id}/media-accounts/naver/brandstore`|`./tsup.config.ts`|
+|네이버 브랜드스토어 media account 수정|`putNaverBrandstoreMediaAccountWorkspacesWorkspaceIdMediaAccountsNaverBrandstoreMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/naver/brandstore/{media_account_id}`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Criteo
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Criteo 연동 가능한 계정 목록 확인|`getCriteoAdAccountsWorkspacesWorkspaceIdMediaAccountsCriteoAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/criteo/ad-accounts`|`./tsup.config.ts`|
+|Criteo media 생성 get_criteo_ad_accounts 조회된 account_id 중 선택된 |`createCriteoMediaAccountWorkspacesWorkspaceIdMediaAccountsCriteoPost`|`POST /workspaces/{workspace_id}/media-accounts/criteo`|`./tsup.config.ts`|
+|Criteo media 수정|`putCriteoMediaAccountWorkspacesWorkspaceIdMediaAccountsCriteoMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/criteo/{media_account_id}`|`./tsup.config.ts`|
+|크리테오 계정 유효성 검사|`verifyCriteoAccountWorkspacesWorkspaceIdMediaAccountsCriteoMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/criteo/{media_account_id}/verify`|`./tsup.config.ts`|
+|criteo 수집 정책 API(IET-6338)|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsCriteoPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/criteo/policy`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Tiktok
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|틱톡 권한 연동 가능한 advertiser 목록 조회|`getTiktokAdvertisersWorkspacesWorkspaceIdMediaAccountsTiktokAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/tiktok/ad-accounts`|`./tsup.config.ts`|
+|틱톡 media account 생성|`createTiktokMediaAccountWorkspacesWorkspaceIdMediaAccountsTiktokPost`|`POST /workspaces/{workspace_id}/media-accounts/tiktok`|`./tsup.config.ts`|
+|틱톡 media account 수정|`putTiktokMediaAccountWorkspacesWorkspaceIdMediaAccountsTiktokMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/tiktok/{media_account_id}`|`./tsup.config.ts`|
+|틱톡 account 유효성 검사|`verifyTiktokAccountWorkspacesWorkspaceIdMediaAccountsTiktokMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/tiktok/{media_account_id}/verify`|`./tsup.config.ts`|
+|틱톡 수집 정책 조회 API(IET-6310)|`getAccountPolicyWorkspacesWorkspaceIdMediaAccountsTiktokPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/tiktok/policy`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Cafe24
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|선택한 Cafe24 조직자산 정보 반환|`getOrgAccountMallIdWorkspacesWorkspaceIdMediaAccountsCafe24MallIdGet`|`GET /workspaces/{workspace_id}/media-accounts/cafe24/mall-id`|`./tsup.config.ts`|
+|Cafe24 Analytics media 생성|`createCafe24AnalyticsMediaAccountWorkspacesWorkspaceIdMediaAccountsCafe24AnalyticsPost`|`POST /workspaces/{workspace_id}/media-accounts/cafe24/analytics`|`./tsup.config.ts`|
+|Cafe24 Analytics media 수정 (이름 변경, on/off 변경)|`putCafe24AnalyticsMediaAccountWorkspacesWorkspaceIdMediaAccountsCafe24AnalyticsMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/cafe24/analytics/{media_account_id}`|`./tsup.config.ts`|
+|Cafe24 Admin media 생성|`createCafe24AdminMediaAccountWorkspacesWorkspaceIdMediaAccountsCafe24AdminPost`|`POST /workspaces/{workspace_id}/media-accounts/cafe24/admin`|`./tsup.config.ts`|
+|Cafe24 Admin media 수정 (이름 변경, on/off 변경)|`putCafe24AdminMediaAccountWorkspacesWorkspaceIdMediaAccountsCafe24AdminMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/cafe24/admin/{media_account_id}`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Reddit
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|해당 reddit organization id의 비즈니스 목록 조회|`getRedditBusinessWorkspacesWorkspaceIdMediaAccountsRedditBusinessGet`|`GET /workspaces/{workspace_id}/media-accounts/reddit/business`|`./tsup.config.ts`|
+|해당 reddit organization id의 비즈니스 하위 광고 계정 목록 조회|`getRedditAdAccountsWorkspacesWorkspaceIdMediaAccountsRedditAdAccountsGet`|`GET /workspaces/{workspace_id}/media-accounts/reddit/ad-accounts`|`./tsup.config.ts`|
+|Reddit media account 생성|`createRedditMediaAccountWorkspacesWorkspaceIdMediaAccountsRedditPost`|`POST /workspaces/{workspace_id}/media-accounts/reddit`|`./tsup.config.ts`|
+|Reddit media account 수정|`putRedditMediaAccountWorkspacesWorkspaceIdMediaAccountsRedditMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/reddit/{media_account_id}`|`./tsup.config.ts`|
+|Reddit 수집 정책 조회 API - 타임존 목록 제공|`getRedditAccountPolicyWorkspacesWorkspaceIdMediaAccountsRedditPolicyGet`|`GET /workspaces/{workspace_id}/media-accounts/reddit/policy`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Karrot
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|karrot media 생성|`createKarrotMediaAccountWorkspacesWorkspaceIdMediaAccountsKarrotPost`|`POST /workspaces/{workspace_id}/media-accounts/karrot`|`./tsup.config.ts`|
+|karrot media 수정|`putKarrotMediaAccountWorkspacesWorkspaceIdMediaAccountsKarrotMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/karrot/{media_account_id}`|`./tsup.config.ts`|
+|karrot 계정 유효성 검사|`verifyKarrotAccountWorkspacesWorkspaceIdMediaAccountsKarrotMediaAccountIdVerifyGet`|`GET /workspaces/{workspace_id}/media-accounts/karrot/{media_account_id}/verify`|`./tsup.config.ts`|
+## Workspace &#x2F; Media Accounts &#x2F; Amazon
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|해당 Amazon Ads 조직자산으로 접근 가능한 프로필 목록 조회 Note: Amazon DSP는 acco|`getAmazonDspProfilesWorkspacesWorkspaceIdMediaAccountsAmazonDspProfilesGet`|`GET /workspaces/{workspace_id}/media-accounts/amazon/dsp/profiles`|`./tsup.config.ts`|
+|해당 프로필로 접근 가능한 DSP Advertiser 목록 조회|`getAmazonDspAdvertisersWorkspacesWorkspaceIdMediaAccountsAmazonDspProfilesProfileIdAdvertisersGet`|`GET /workspaces/{workspace_id}/media-accounts/amazon/dsp/profiles/{profile_id}/advertisers`|`./tsup.config.ts`|
+|Amazon DSP media account 생성|`createAmazonDspMediaAccountWorkspacesWorkspaceIdMediaAccountsAmazonDspPost`|`POST /workspaces/{workspace_id}/media-accounts/amazon/dsp`|`./tsup.config.ts`|
+|Amazon DSP media account 수정|`putAmazonDspMediaAccountWorkspacesWorkspaceIdMediaAccountsAmazonDspMediaAccountIdPut`|`PUT /workspaces/{workspace_id}/media-accounts/amazon/dsp/{media_account_id}`|`./tsup.config.ts`|
+## Workspaces&#x2F;Externals
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|업로드 파일 s3 임시 업로드용 PresignedUp URL 생성|`generatePreSignedUrlWorkspacesWorkspaceIdExternalsUploadPost`|`POST /workspaces/{workspace_id}/externals/upload`|`./tsup.config.ts`|
+|파일 업로드를 통한 external data 생성|`createExternalFromFileWorkspacesWorkspaceIdExternalsFilePost`|`POST /workspaces/{workspace_id}/externals/file`|`./tsup.config.ts`|
+|파일 업로드를 통한 external data 수정|`updateExternalFromFileWorkspacesWorkspaceIdExternalsExternalIdFilePut`|`PUT /workspaces/{workspace_id}/externals/{external_id}/file`|`./tsup.config.ts`|
+|Excel 파일의 시트 목록 조회 API 업로드된 Excel 파일 내의 모든 시트 정보를 반환|`getExcelFileSheetsWorkspacesWorkspaceIdExternalsFileExcelSheetsGet`|`GET /workspaces/{workspace_id}/externals/file/excel-sheets`|`./tsup.config.ts`|
+|업로드된 파일 컬럼 데이터 타입 검증|`validateExcelFileSheetsWorkspacesWorkspaceIdExternalsFileValidateGet`|`GET /workspaces/{workspace_id}/externals/file/validate`|`./tsup.config.ts`|
+|업로드 된 파일 데이터로 기존 DB external 데이터 업데이트, 실패 시 연동 상태 수정|`refreshFileWithExternalDataWorkspacesWorkspaceIdExternalsFileRefreshPut`|`PUT /workspaces/{workspace_id}/externals/file/refresh`|`./tsup.config.ts`|
+|새로 업로드 된 파일 데이터 또는 새로운 시트 컬럼 타입과 기존 DB external 데이터의 컬럼 비교|`verifyExternalDataByExternalIdWorkspacesWorkspaceIdExternalsExternalIdVerifyGet`|`GET /workspaces/{workspace_id}/externals/{external_id}/verify`|`./tsup.config.ts`|
+|업로드 된 파일 데이터와 기존 DB external 데이터의 컬럼 비교|`verifyFileWithExternalDataWorkspacesWorkspaceIdExternalsExternalIdFileVerifyGet`|`GET /workspaces/{workspace_id}/externals/{external_id}/file/verify`|`./tsup.config.ts`|
+|로그인 된 Oauth(sns_id)와 다른 Oauth와 연동된 외부데이터 목록|`getExternalsWithSnsIdFilterWorkspacesWorkspaceIdExternalsSnsIdGet`|`GET /workspaces/{workspace_id}/externals/sns_id`|`./tsup.config.ts`|
+|external data 조회 v2|`getExternalWorkspacesWorkspaceIdExternalsExternalIdGet`|`GET /workspaces/{workspace_id}/externals/{external_id}`|`./tsup.config.ts`|
+|외부데이터 구글 시트 계정 변경 가능 여부 확인|`verifySheetAndReconnectionExternalWorkspacesWorkspaceIdExternalsExternalIdReconnectionPut`|`PUT /workspaces/{workspace_id}/externals/{external_id}/reconnection`|`./tsup.config.ts`|
+|단일 external data를 리프레쉬 하는 API|`refreshExternalDataWorkspacesWorkspaceIdExternalsExternalIdRefreshPut`|`PUT /workspaces/{workspace_id}/externals/{external_id}/refresh`|`./tsup.config.ts`|
+|외부데이터 데이터 파일 다운로드 링크 생성|`downloadExternalDataFileWorkspacesWorkspaceIdExternalsExternalIdFileDownloadGet`|`GET /workspaces/{workspace_id}/externals/{external_id}/file/download`|`./tsup.config.ts`|
+## Report Templates&#x2F;Smart
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|smart mode 에서 각 매체 별로 제공하는 유형|`getMediaCategoriesTemplatesSmartMediaCategoriesGet`|`GET /templates/smart/media-categories`|`./tsup.config.ts`|
+|Smart Selector DM 컬럼 수동 refresh (DM 테이블 컬럼 수정 배포 시)|`refreshTableColumnsTemplatesSmartRefreshTableColumnsGet`|`GET /templates/smart/refresh-table-columns`|`./tsup.config.ts`|
+|기본 추천 컬럼 목록 조회 API|`verifyRecommendColumnsTemplatesSmartVerifyColumnCompatibilityPost`|`POST /templates/smart/verify-column-compatibility`|`./tsup.config.ts`|
+|Smart Mode 매체 데이터 설정 시 노출될 컬럼 목록 제공 API|`getMediaDataColumnsTemplatesSmartMediaDataColumnsPost`|`POST /templates/smart/media-data-columns`|`./tsup.config.ts`|
+|Smart Mode 매체 그룹별 선택된 컬럼 유효성 검사|`verifySelectedColumnsTemplatesSmartVerifySelectedColumnsPost`|`POST /templates/smart/verify-selected-columns`|`./tsup.config.ts`|
+## Report Templates&#x2F;Smart&#x2F;Rules
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Smart Rules 상세 조회 API|`getSmartRuleDetailTemplatesReportTemplateIdSmartRulesReportRuleIdGet`|`GET /templates/{report_template_id}/smart/rules/{report_rule_id}`|`./tsup.config.ts`|
+|Smart rule 임시 저장 API|`saveTemporarySmartRuleDataTemplatesReportTemplateIdSmartRulesTemporaryPost`|`POST /templates/{report_template_id}/smart/rules/temporary`|`./tsup.config.ts`|
+|Smart Rule 생성 API|`createSmartRuleTemplatesReportTemplateIdSmartRulesPost`|`POST /templates/{report_template_id}/smart/rules`|`./tsup.config.ts`|
+|Smart Rule 에서 Custom Rule 생성 API|`copySmartRuleTemplatesReportTemplateIdSmartRulesCopyPost`|`POST /templates/{report_template_id}/smart/rules/copy`|`./tsup.config.ts`|
+## Report Templates&#x2F;Smart&#x2F;Preprocess
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Will Deprecated Soon|`getSmartPreprocessedDataTemplatesSmartPreprocessPost`|`POST /templates/smart/preprocess`|`./tsup.config.ts`|
+|Smart Rule 개별 전처리 데이터 요청 API (그룹 단위)|`getSmartGroupPreprocessDataTemplatesSmartPreprocessGroupGroupIdPost`|`POST /templates/smart/preprocess/group/{group_id}`|`./tsup.config.ts`|
+|Smart Rule 통합 처리 데이터 요청 API|`getSmartIntegrateDataTemplatesSmartPreprocessIntegratePost`|`POST /templates/smart/preprocess/integrate`|`./tsup.config.ts`|
+|SmartMode 전처리 메트릭스 전체 조회 API 기존과 동일 DM API 활용|`getSmartTotalPreprocessMetricsTemplatesSmartPreprocessTotalInfoPost`|`POST /templates/smart/preprocess/total-info`|`./tsup.config.ts`|
+|스마트룰용 데이터 컬럼별 유니크 값 조회|`getSmartColumnUniqueValuesTemplatesSmartPreprocessColumnUniqueValuesPost`|`POST /templates/smart/preprocess/column-unique-values`|`./tsup.config.ts`|
+## Report Templates
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|Workspace report template 조회 스마트 모드 구분을 위해 mode 추가|`getReportTemplateTemplatesReportTemplateIdGet`|`GET /templates/{report_template_id}`|`./tsup.config.ts`|
+|리포트 템플릿 수정 API|`putReportTemplateTemplatesReportTemplateIdPut`|`PUT /templates/{report_template_id}`|`./tsup.config.ts`|
+|전체 리포트 템플릿 조회. 즐겨찾기가 존재하는 경우, response가 나눠져서 전달 됨 스마트 모드 구분을|`getAllReportTemplatesTemplatesGet`|`GET /templates`|`./tsup.config.ts`|
+|리포트 템플릿 생성 API|`createReportTemplateTemplatesPost`|`POST /templates`|`./tsup.config.ts`|
+## Report Templates&#x2F;Preprocess
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|전처리 DM 연동 API v2|`getPreprocessedDataTemplatesPreprocessPost`|`POST /templates/preprocess`|`./tsup.config.ts`|
+|데이터 통합용 선택된 컬럼 목록 요청 v2|`getSelectedColumnsFromTablesTemplatesPreprocessSelectedColumnsPost`|`POST /templates/preprocess/selected-columns`|`./tsup.config.ts`|
+|비호환 컬럼 목록 제공 API v2 {COLUMN_NAME: [incompatible-columns-list|`getIncompatibleColumnsByMediaTemplatesPreprocessIncompatibleColumnsGet`|`GET /templates/preprocess/incompatible-columns`|`./tsup.config.ts`|
+|워크스텝을 병합하는 API v2|`mergeWorkStepsTemplatesPreprocessMergePost`|`POST /templates/preprocess/merge`|`./tsup.config.ts`|
+## Report Templates&#x2F;Report Rules
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|리포트 내보내기 API(IET-3698)|`exportReportDataTemplatesReportTemplateIdRulesReportRuleIdExportPost`|`POST /templates/{report_template_id}/rules/{report_rule_id}/export`|`./tsup.config.ts`|
+## &#x2F;Feature&#x2F;Organizations
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|각 org별 permission 정보 받아오는 api|`getAllOrgPermissionsFeatureOrganizationsPermissionGet`|`GET /feature/organizations/permission`|`./tsup.config.ts`|
+|해당하는 org 정보 받아오는 api|`getOrgPermissionsFeatureOrganizationsOrgIdPermissionGet`|`GET /feature/organizations/{org_id}/permission`|`./tsup.config.ts`|
+|org permission 업데이트 하는 api|`updateOrgPermissionFeatureOrganizationsOrgIdPermissionPut`|`PUT /feature/organizations/{org_id}/permission`|`./tsup.config.ts`|
+## &#x2F;Feature&#x2F;Workspaces
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|해당 workspace의 각 피처별 상태 조회 api|`getWorkspaceStatusFeatureWorkspacesWsIdStatusGet`|`GET /feature/workspaces/{ws_id}/status`|`./tsup.config.ts`|
+|모든 org내부 workspace별 permission 조회하는 api|`getAllPermissionFeatureWorkspacesPermissionGet`|`GET /feature/workspaces/permission`|`./tsup.config.ts`|
+|피처별 상태를 일괄 변경하는 API|`updateCenterStateBatchFeatureWorkspacesStatusPut`|`PUT /feature/workspaces/status`|`./tsup.config.ts`|
+|workspace의 각 센터별 성태를 업데이트 하는 api|`updateWorkspacePermissionFeatureWorkspacesWsIdPermissionPut`|`PUT /feature/workspaces/{ws_id}/permission`|`./tsup.config.ts`|
+## Default
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|firestore 토큰 발급받는 api|`getTokenFeatureTokenGet`|`GET /feature/token`|`./tsup.config.ts`|
+|product 리스트 가져오는 api|`getProductListFeatureProductGet`|`GET /feature/product`|`./tsup.config.ts`|
+|product 생성하는 api|`createProductFeatureProductPost`|`POST /feature/product`|`./tsup.config.ts`|
+|Get Permission|`getPermissionFeaturePermissionGet`|`GET /feature/permission`|`./tsup.config.ts`|
+|특정 product의 정보 조회 (URL과 상태값 포함)|`getProductInfoFeatureProductProductNameGet`|`GET /feature/product/{product_name}`|`./tsup.config.ts`|
+|product의 정보를 업데이트하는 API (현재는 URL만 지원)|`updateProductFeatureProductProductNamePut`|`PUT /feature/product/{product_name}`|`./tsup.config.ts`|
+|product 삭제하는 api|`deleteProductFeatureProductProductNameDelete`|`DELETE /feature/product/{product_name}`|`./tsup.config.ts`|
+|Add Sub Permission|`addSubPermissionFeatureProductProductNameSubPermissionPost`|`POST /feature/product/{product_name}/sub_permission`|`./tsup.config.ts`|
+|Delete Sub Permission|`deleteSubPermissionFeatureProductProductNameSubPermissionSubNameDelete`|`DELETE /feature/product/{product_name}/sub_permission/{sub_name}`|`./tsup.config.ts`|
+|앱에서 사용 가능한 모든 timezone 조회 API 매체와 상관없이 전역적으로 사용되는 timezone 목|`getTimezonesUtilsTimezonesGet`|`GET /utils/timezones`|`./tsup.config.ts`|
+## scheduler
+|Intent|API|Path|Source File|
+|:---|:---|:---|:---|
+|스케줄 목록 조회|`listExportSchedulesSchedulerSchedulesGet`|`GET /scheduler/schedules`|`./tsup.config.ts`|
+|스케줄 생성|`createExportScheduleSchedulerSchedulesPost`|`POST /scheduler/schedules`|`./tsup.config.ts`|
+|스케줄 상세 조회 (workspace timezone + config 전체 필드 포함)|`getExportScheduleDetailSchedulerSchedulesScheduleIdGet`|`GET /scheduler/schedules/{schedule_id}`|`./tsup.config.ts`|
+|스케줄 수정|`updateExportScheduleSchedulerSchedulesScheduleIdPut`|`PUT /scheduler/schedules/{schedule_id}`|`./tsup.config.ts`|
+|스케줄 삭제|`deleteExportScheduleSchedulerSchedulesScheduleIdDelete`|`DELETE /scheduler/schedules/{schedule_id}`|`./tsup.config.ts`|
+|스케줄 실행 내역 조회 (페이지네이션, created_at DESC 정렬)|`getExportScheduleRunsSchedulerSchedulesScheduleIdRunsGet`|`GET /scheduler/schedules/{schedule_id}/runs`|`./tsup.config.ts`|
